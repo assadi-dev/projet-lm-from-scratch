@@ -7,6 +7,9 @@ pour apprendre à prédire le token suivant.
 
 import torch
 from torch.utils.data import Dataset, DataLoader
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from tokenizer import Tokenizer
 

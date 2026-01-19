@@ -8,6 +8,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import math
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from embeddings import TransformerEmbedding
 from attention import create_causal_mask
