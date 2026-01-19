@@ -30,10 +30,10 @@ share/python-wheels/
 MANIFEST
 
 # Project specific
-llm-project/checkpoints/
-llm-project/logs/
-llm-project/data/raw/
-llm-project/data/processed/
+checkpoints/
+logs/
+data/raw/
+data/processed/
 *.log
 
 # Jupyter Notebook

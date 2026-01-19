@@ -23,7 +23,7 @@ Le modèle suit une architecture **Decoder-only Transformer** moderne, incluant 
 ## 📁 Structure du Projet
 
 ```text
-llm-project/
+.
 ├── checkpoints/       # Sauvegarde des poids du modèle
 ├── config/            # Fichiers de configuration YAML
 ├── data/              # Dossiers pour les données brutes et traitées
@@ -35,7 +35,10 @@ llm-project/
 │   ├── data/          # Chargeurs de données (DataLoaders)
 │   ├── training/      # Boucles d'entraînement
 │   └── inference/     # Scripts de génération de texte
-└── requirements.txt   # Dépendances Python
+├── README.md          # Documentation principale
+├── architecture.md    # Guide technique détaillé
+├── requirements.txt   # Dépendances Python
+└── setup_project.bat  # Script d'initialisation
 ```
 
 ## 🛠️ Installation et Configuration
