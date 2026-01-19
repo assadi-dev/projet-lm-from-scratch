@@ -43,7 +43,7 @@ class TokenEmbedding(nn.Module):
         return self.embedding(x) * math.sqrt(self.d_model)
 
 
-class PositionalEncoding(nn.Module):
+class PositionalEmbedding(nn.Module):
     """
    Ajoute l'information de position aux tokens.
     
@@ -61,8 +61,8 @@ class PositionalEncoding(nn.Module):
         """
         super().__init__()
 
-        # Positional encoding pour chaque position possible
-        self.positional_encoding = nn.Embedding(max_seq_len, d_model)
+        # Une embedding pour chaque position possible
+        self.embedding = nn.Embedding(max_seq_len, d_model)
 
     def forward(self,seq_len:int,device):
         """
@@ -78,7 +78,7 @@ class PositionalEncoding(nn.Module):
         positions = torch.arange(seq_len, device=device)
 
         # Obtenir les embeddings des positions
-        return self.positional_encoding(positions)
+        return self.embedding(positions)
 
 class TransformerEmbedding(nn.Module):
     """
@@ -90,7 +90,7 @@ class TransformerEmbedding(nn.Module):
         super().__init__()
 
         self.token_embedding = TokenEmbedding(vocab_size, d_model)
-        self.positional_encoding = PositionalEncoding(max_seq_len, d_model)
+        self.position_embedding = PositionalEmbedding(max_seq_len, d_model)
         self.dropout = nn.Dropout(dropout)
 
     def forward(self,x):
@@ -112,3 +112,37 @@ class TransformerEmbedding(nn.Module):
         # Additionner et appliquer dropout
         # pos_emb est broadcasté sur la dimension batch
         return self.dropout(tok_emb + pos_emb)
+
+
+
+
+# =============================================================================
+# TEST : Vérifie que tout fonctionne
+# =============================================================================
+
+if __name__ == "__main__":
+    # Paramètres
+    vocab_size = 32000   # Taille du vocabulaire
+    d_model = 256        # Dimension des embeddings
+    max_seq_len = 512    # Longueur max des séquences
+    batch_size = 2       # Nombre de séquences en parallèle
+    seq_len = 10         # Longueur de notre séquence test
+    
+    # Créer le module d'embedding
+    embedding = TransformerEmbedding(vocab_size, d_model, max_seq_len)
+    
+    # Créer des données de test (IDs aléatoires simulant des tokens)
+    x = torch.randint(0, vocab_size, (batch_size, seq_len))
+    print(f"Input shape: {x.shape}")           # (2, 10)
+    print(f"Input (token IDs):\n{x}")
+    
+    # Forward pass
+    output = embedding(x)
+    print(f"\nOutput shape: {output.shape}")   # (2, 10, 256)
+    print(f"Output (premiers vecteurs):\n{output[0, 0, :10]}")  # 10 premiers nombres
+    
+    # Compter les paramètres
+    total_params = sum(p.numel() for p in embedding.parameters())
+    print(f"\nNombre de paramètres: {total_params:,}")
+    # vocab_size * d_model + max_seq_len * d_model
+    # = 32000 * 256 + 512 * 256 = 8,323,072
