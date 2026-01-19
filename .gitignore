@@ -1,0 +1,50 @@
+# Environment
+venv/
+.env
+.venv
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Project specific
+llm-project/checkpoints/
+llm-project/logs/
+llm-project/data/raw/
+llm-project/data/processed/
+*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
