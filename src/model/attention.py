@@ -119,6 +119,37 @@ def create_causal_mask(seq_len: int, device):
     # Ajouter dimensions pour batch et heads: (1, 1, seq_len, seq_len)
     return mask.unsqueeze(0).unsqueeze(0)
 
+# =============================================================================
+# TEST : Vérifie que tout fonctionne
+# =============================================================================
+
+if __name__ == "__main__":
+    # Paramètres
+    d_model = 256
+    n_heads = 8
+    batch_size = 2
+    seq_len = 10
+    
+    # Créer le module d'attention
+    attention = MultiHeadAttention(d_model, n_heads)
+    
+    # Créer des données de test
+    x = torch.randn(batch_size, seq_len, d_model)
+    print(f"Input shape: {x.shape}")  # (2, 10, 256)
+    
+    # Créer le masque causal
+    mask = create_causal_mask(seq_len, x.device)
+    print(f"Mask shape: {mask.shape}")  # (1, 1, 10, 10)
+    print(f"Mask (visualisation):\n{mask[0, 0]}")
+    
+    # Forward pass
+    output = attention(x, mask)
+    print(f"\nOutput shape: {output.shape}")  # (2, 10, 256)
+    
+    # Compter les paramètres
+    total_params = sum(p.numel() for p in attention.parameters())
+    print(f"\nNombre de paramètres: {total_params:,}")
+    # 4 matrices de (d_model x d_model) = 4 * 256 * 256 = 262,144
 
 
       
