@@ -70,6 +70,10 @@ Le modèle suit une architecture **Decoder-only Transformer** moderne, incluant 
 1. **Préparation des données** : Placez vos fichiers `.txt` dans `data/raw/`.
 2. **Entraînement** : Utilisez les scripts dans `src/training/`.
 3. **Génération** : Testez le modèle avec les scripts dans `src/inference/`.
+4. **Chat Interactif** : Démarrez une session de chat avec le modèle :
+   ```bash
+   python src/chat.py
+   ```
 
 ## 📚 Ressources
 - `architecture.md` : Guide détaillé sur les mathématiques et l'implémentation des composants.
