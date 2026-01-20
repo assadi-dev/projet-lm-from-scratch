@@ -67,7 +67,7 @@ def main():
     # =========================================================================
     
     # Dataset
-    MAX_SAMPLES = 5000          # Nombre d'histoires (augmenter pour mieux apprendre)
+    MAX_SAMPLES = 50000          # Nombre d'histoires (augmenter pour mieux apprendre)
     
     # Modèle
     D_MODEL = 256               # Dimension du modèle
